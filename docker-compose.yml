@@ -1,0 +1,16 @@
+version: "3"
+
+services: 
+  healthcheck:
+    build: 
+      context: .
+    volumes: 
+      - ./:/go/src/app
+    command: air
+    environment: 
+      - LINE_LOGIN_CODE=VZ14VlW85dj52mqzkmmA
+      - LINE_LOGIN_REDIRECT_URI=http://localhost:3001/login
+      - LINE_LOGIN_CLIENT_ID=1655725841
+      - LINE_LOGIN_CLIENT_SECRET=2adb70cfde4393aef8d96f7f4c4f45eb
+      - LINE_LOGIN_API_URL=https://api.line.me/oauth2/v2.1/token
+      - HEALTHCHECK_REPORT_URL=https://backend-challenge.line-apps.com/healthcheck/report

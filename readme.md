@@ -2,10 +2,10 @@
 # Instructions
 First you must setup your environments.
 
-via docker -> <br/>
+via docker<br/>
 > set up in docker-compose.yml file.<br/>
 
-via command line -><br/>
+via command line<br/>
 > export LINE_LOGIN_CODE={value}<br/>
 > export LINE_LOGIN_REDIRECT_URI={value}<br/> 
 > export LINE_LOGIN_CLIENT_ID={value}<br/>
@@ -14,14 +14,14 @@ via command line -><br/>
 > export HEALTHCHECK_REPORT_URL={value} (optional)<br/>
 
 # Installation
-via docker -> 
+via docker
 > docker-compose up --build<br/>
 
-via command line -> 
+via command line
 > go install -v ./
 
 # Usage
-via command line -> 
+via command line 
 > go-healthcheck {csv-file}
 
 # Running Test

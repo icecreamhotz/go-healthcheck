@@ -1,5 +1,5 @@
 
-#Instructions
+# Instructions
 First you must setup your environments.
 
 via docker -> set up in docker-compose.yml file.
@@ -11,12 +11,12 @@ export LINE_LOGIN_CLIENT_SECRET={value}
 export LINE_LOGIN_API_URL={value} (optional)
 export HEALTHCHECK_REPORT_URL={value} (optional)
 
-#Installation
+# Installation
 via docker -> docker-compose up --build
 via command line -> go install -v .
 
-#Usage
+# Usage
 via command line -> go-healthcheck {csv-file}
 
-#Running Test
+# Running Test
 go test ./ -v

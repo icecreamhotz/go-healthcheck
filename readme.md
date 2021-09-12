@@ -16,6 +16,7 @@ via command line -><br/>
 # Installation
 via docker -> 
 > docker-compose up --build<br/>
+
 via command line -> 
 > go install -v ./
 

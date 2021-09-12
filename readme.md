@@ -4,6 +4,7 @@ First you must setup your environments.
 
 via docker -> <br/>
 > set up in docker-compose.yml file.<br/>
+
 via command line -><br/>
 > export LINE_LOGIN_CODE={value}<br/>
 > export LINE_LOGIN_REDIRECT_URI={value}<br/> 

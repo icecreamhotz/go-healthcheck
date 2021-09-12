@@ -11,9 +11,6 @@ const (
 
 var (
 	// common variables
-	emptyConf = config{}
-	parser    = newKingpinParser()
-
 	lineLoginGrantType    = "authorization_code"
 	contentTypeJSON       = "application/json"
 	contentTypeUrlEncoded = "application/x-www-form-urlencoded"

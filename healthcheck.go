@@ -5,6 +5,7 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"net/url"
 	"os"
 	"sync"
@@ -97,6 +98,7 @@ func (hc *healthCheck) reportStatistic(siteTotal int, successTotal int, failTota
 	ch := make(chan httpResult)
 	headers := map[string]string{
 		"Authorization": lineData.AccessToken,
+		"Content-Type":  contentTypeJSON,
 	}
 	data := &statistic{
 		TotalWebsites: siteTotal,
@@ -107,7 +109,7 @@ func (hc *healthCheck) reportStatistic(siteTotal int, successTotal int, failTota
 	payloadBuf := new(bytes.Buffer)
 	json.NewEncoder(payloadBuf).Encode(data)
 
-	go hc.Request.post(hc.Config.HEALTHCHECK_URL, contentTypeJSON, payloadBuf, headers, ch)
+	go hc.Request.post(hc.Config.HEALTHCHECK_URL, payloadBuf, headers, ch)
 
 	resp := <-ch
 	close(ch)
@@ -124,18 +126,21 @@ func (hc *healthCheck) reportStatistic(siteTotal int, successTotal int, failTota
 }
 
 func main() {
-	cfg, err := parser.parse(os.Args)
+	parser := newKingpinParser()
+	file, err := parser.parse(os.Args)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
+	cfg := newConfig(file)
 	if err := cfg.checkArgs(); err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	httpHc := newHttp()
+	client := &http.Client{}
+	httpHc := newHttp(client)
 	lineAPI := newLineAPI(cfg, httpHc)
 	hc := newHealthCheck(cfg, httpHc, lineAPI)
 

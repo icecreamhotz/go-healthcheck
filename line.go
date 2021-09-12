@@ -36,8 +36,11 @@ func (lapi *lineAPI) getAccessToken(siteTotal int, successTotal int, failTotal i
 	body.Set("redirect_uri", lapi.Config.LINE_LOGIN_REDIRECT_URI)
 	body.Set("client_id", lapi.Config.LINE_LOGIN_CLIENT_ID)
 	body.Set("client_secret", lapi.Config.LINE_LOGIN_CLIENT_SECRET)
+	headers := map[string]string{
+		"Content-Type": contentTypeUrlEncoded,
+	}
 
-	go lapi.Request.post(lapi.Config.LINE_LOGIN_API_URL, contentTypeUrlEncoded, strings.NewReader(body.Encode()), nil, ch)
+	go lapi.Request.post(lapi.Config.LINE_LOGIN_API_URL, strings.NewReader(body.Encode()), headers, ch)
 
 	resp := <-ch
 	close(ch)

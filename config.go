@@ -20,6 +20,27 @@ type config struct {
 	HEALTHCHECK_URL          string
 }
 
+func newConfig(file string) config {
+	healthCheckUrl := os.Getenv("HEALTHCHECK_REPORT_URL")
+	if healthCheckUrl == "" {
+		healthCheckUrl = DEFAULT_HEATHCHECK_URL
+	}
+	lineLoginAPIUrl := os.Getenv("LINE_LOGIN_API_URL")
+	if lineLoginAPIUrl == "" {
+		lineLoginAPIUrl = DEFAULT_LINE_LOGIN_API_URL
+	}
+
+	return config{
+		File: file,
+		LINE_LOGIN_CODE: os.Getenv("LINE_LOGIN_CODE"),
+		LINE_LOGIN_REDIRECT_URI: os.Getenv("LINE_LOGIN_REDIRECT_URI"),
+		LINE_LOGIN_CLIENT_ID: os.Getenv("LINE_LOGIN_CLIENT_ID"),
+		LINE_LOGIN_CLIENT_SECRET: os.Getenv("LINE_LOGIN_CLIENT_SECRET"),
+		LINE_LOGIN_API_URL: lineLoginAPIUrl,
+		HEALTHCHECK_URL: healthCheckUrl,
+	}
+}
+
 func (c *config) checkArgs() error {
 	checks := []func() error{
 		c.checkFileExist,
@@ -44,12 +65,7 @@ func (c *config) checkFileExist() error {
 }
 
 func (c *config) checkLineEnv() error {
-	lineLoginCode := os.Getenv("LINE_LOGIN_CODE")
-	lineLoginRedirectUri := os.Getenv("LINE_LOGIN_REDIRECT_URI")
-	lineLoginClientID := os.Getenv("LINE_LOGIN_CLIENT_ID")
-	lineLoginClientSecret := os.Getenv("LINE_LOGIN_CLIENT_SECRET")
-
-	if lineLoginCode == "" || lineLoginRedirectUri == "" || lineLoginClientID == "" || lineLoginClientSecret == "" {
+	if c.LINE_LOGIN_CODE == "" || c.LINE_LOGIN_REDIRECT_URI == "" || c.LINE_LOGIN_CLIENT_ID == "" || c.LINE_LOGIN_CLIENT_SECRET == "" {
 		return errLineEnvBlank
 	}
 

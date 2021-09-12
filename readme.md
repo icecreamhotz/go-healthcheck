@@ -12,7 +12,7 @@ export LINE_LOGIN_API_URL={value} (optional)<br/>
 export HEALTHCHECK_REPORT_URL={value} (optional)<br/>
 
 # Installation
-via docker -> docker-compose up --build
+via docker -> docker-compose up --build<br/>
 via command line -> go install -v .
 
 # Usage

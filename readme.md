@@ -1,5 +1,5 @@
 
-# Instructions
+# Instruction
 First you must setup your environments.
 
 via docker<br/>
@@ -21,6 +21,9 @@ via command line
 > go install -v ./
 
 # Usage
+via docker
+> docker-compose up
+
 via command line 
 > go-healthcheck {csv-file}
 
